@@ -1,10 +1,13 @@
 package com.krzywdek19.student_diary.school;
 
 import com.krzywdek19.student_diary.common.Address;
+import com.krzywdek19.student_diary.school.schoolClass.SchoolClass;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Entity
 @Table(name = "school")
@@ -19,6 +22,8 @@ public class School {
     @Embedded
     private Address address;
     private SchoolType schoolType;
+    @OneToMany(mappedBy = "school", orphanRemoval = true, cascade = CascadeType.ALL)
+    private List<SchoolClass> schoolClasses;
     private int studentCount;
     private int classCount;
 }
