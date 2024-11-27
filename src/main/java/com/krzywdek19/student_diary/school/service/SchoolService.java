@@ -13,7 +13,7 @@ public interface SchoolService {
     SchoolDto findSchoolById(Long id);
     List<SchoolDto> findAllSchools();
     //UPDATE
-    SchoolDto changeSchoolDetails(UpdateSchoolRequest request);
+    SchoolDto changeSchoolDetails(Long id, UpdateSchoolRequest request);
     //DELETE
     void deleteSchoolById(Long id);
 }

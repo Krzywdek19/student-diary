@@ -4,10 +4,11 @@ import com.krzywdek19.student_diary.common.Address;
 import com.krzywdek19.student_diary.school.SchoolType;
 import jakarta.annotation.Nullable;
 
+import java.util.Optional;
+
 public record UpdateSchoolRequest(
-        Long id,
-        @Nullable String name,
-        @Nullable Address address,
-        @Nullable SchoolType schoolType
+        Optional<String> name,
+        Optional<Address> address,
+        Optional<SchoolType> schoolType
         ) {
 }
