@@ -1,5 +1,6 @@
 package com.krzywdek19.student_diary.school.schoolClass;
 
+import com.krzywdek19.student_diary.school.School;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -16,4 +17,6 @@ public class SchoolClass {
     private Long id;
     private int classGrade;
     private char classSign;
+    @ManyToOne
+    private School school;
 }
