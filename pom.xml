@@ -67,7 +67,7 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
-					<mainClass>com/krzywdek19/student_diary/StudentDiaryApplication.java</mainClass>
+					<mainClass>com/krzywdek19/student_diary/StudentDiaryApplication</mainClass>
 					<layout>JAR</layout>
 				</configuration>
 			</plugin>
