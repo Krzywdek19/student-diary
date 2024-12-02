@@ -14,7 +14,7 @@ public interface SchoolMapper {
     @Mapping(source = "schoolType", target = "schoolType")
     @Mapping(target = "studentCount", ignore = true)
     @Mapping(target = "classCount", ignore = true)
-    @Mapping(source = "schoolClasses", target = "schoolClasses")
+    @Mapping(target = "schoolClasses", ignore = true)
     @Mapping(target = "id", ignore = true)
     School createSchoolRequestToSchool(CreateSchoolRequest request);
 }
