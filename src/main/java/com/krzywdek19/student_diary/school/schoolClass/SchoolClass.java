@@ -18,5 +18,6 @@ public class SchoolClass {
     private int classGrade;
     private char classSign;
     @ManyToOne
+    @JoinColumn(name = "schoolId")
     private School school;
 }
