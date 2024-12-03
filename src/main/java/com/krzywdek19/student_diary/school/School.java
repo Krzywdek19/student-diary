@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -23,7 +24,12 @@ public class School {
     private Address address;
     private SchoolType schoolType;
     @OneToMany(mappedBy = "school", orphanRemoval = true, cascade = CascadeType.ALL)
-    private List<SchoolClass> schoolClasses;
+    private List<SchoolClass> schoolClasses = new ArrayList<>();
     private int studentCount;
     private int classCount;
+
+    public void addSchoolClass(SchoolClass schoolClass){
+        schoolClasses.add(schoolClass);
+        schoolClass.setSchool(this);
+    }
 }

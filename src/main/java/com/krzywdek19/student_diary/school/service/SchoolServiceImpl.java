@@ -35,11 +35,15 @@ public class SchoolServiceImpl implements SchoolService{
     }
 
     //READ
-    @Override
-    public SchoolDto findSchoolById(Long id) {
-        var school = repository
+    public School findSchoolEntityById(Long id){
+        return repository
                 .findById(id)
                 .orElseThrow(()-> new ResourceNotFoundException(School.class, id));
+    }
+
+    @Override
+    public SchoolDto findSchoolById(Long id) {
+        var school = findSchoolEntityById(id);
         return mapper
                 .schoolToSchoolDto(school);
     }

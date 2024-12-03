@@ -1,10 +1,18 @@
 package com.krzywdek19.student_diary.school.schoolClass.dto;
 
-import com.krzywdek19.student_diary.school.dto.SchoolDto;
+import lombok.Data;
 
-public record SchoolClassDto(Long id, int classGrade, char classSign, SchoolDto schoolDto) {
+@Data
+public class SchoolClassDto {
+    private Long id;
+    private int classGrade;
+    private char classSign;
+    private String fullName;
 
-    public String getFullClassName(){
-        return "" + classGrade + classSign;
+    public SchoolClassDto(char classSign, int classGrade, Long id) {
+        this.id = id;
+        this.classGrade = classGrade;
+        this.classSign = classSign;
+        fullName = classGrade + String.valueOf(classSign);
     }
 }

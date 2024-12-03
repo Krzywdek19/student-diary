@@ -2,10 +2,11 @@ package com.krzywdek19.student_diary.school;
 
 import com.krzywdek19.student_diary.school.dto.SchoolDto;
 import com.krzywdek19.student_diary.school.request.CreateSchoolRequest;
+import com.krzywdek19.student_diary.school.schoolClass.SchoolClassMapper;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring",uses = SchoolClassMapper.class)
 public interface SchoolMapper {
     SchoolDto schoolToSchoolDto(School school);
 
