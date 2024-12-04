@@ -16,7 +16,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/v1/class/school/{schoolId}/class")
+@RequestMapping("/api/v1/school/{schoolId}/class")
 public class SchoolClassController {
     private final SchoolClassService service;
 
@@ -25,7 +25,7 @@ public class SchoolClassController {
     public ResponseEntity<ApiResponse<SchoolClassDto>> createSchoolClass(@PathVariable Long schoolId, @RequestBody CreateSchoolClassRequest request, HttpServletRequest httpServletRequest){
         var schoolClass = service.createSchoolClass(schoolId, request);
         return ResponseEntity
-                .status(202)
+                .status(201)
                 .body(ResponseUtil.success(schoolClass, "School class has been created successfully", httpServletRequest.getRequestURI()));
     }
 
