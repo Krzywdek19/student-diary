@@ -15,5 +15,5 @@ public interface SchoolClassService {
     //UPDATE
     SchoolClassDto changeSchoolClassDetails(Long schoolId, Long id, UpdateSchoolClassRequest request);
     //DELETE
-    void deleteSchoolClassById(Long id);
+    void deleteSchoolClassById(Long schoolId, Long id);
 }
