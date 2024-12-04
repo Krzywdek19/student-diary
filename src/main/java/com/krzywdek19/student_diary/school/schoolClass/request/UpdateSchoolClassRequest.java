@@ -1,4 +1,8 @@
 package com.krzywdek19.student_diary.school.schoolClass.request;
+import java.util.Optional;
 
-public record UpdateSchoolClassRequest(long schoolId, int classGrade, char classSign) {
+public record UpdateSchoolClassRequest (
+        Optional<Integer> classGrade,
+        Optional<Character> classSign
+) {
 }
