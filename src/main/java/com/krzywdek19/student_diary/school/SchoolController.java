@@ -22,7 +22,7 @@ public class SchoolController {
     //CREATE
     @PostMapping
     public ResponseEntity<ApiResponse<SchoolDto>> createSchool(@RequestBody CreateSchoolRequest request, HttpServletRequest httpRequest){
-        var school = service.addSchool(request);
+        var school = service.createSchool(request);
         return ResponseEntity
                 .status(201)
                 .body(ResponseUtil.success(school, "School has been added successfully",httpRequest.getRequestURI()));
@@ -30,14 +30,14 @@ public class SchoolController {
 
     //READ
     @GetMapping(path = "/{id}")
-    public ResponseEntity<ApiResponse<SchoolDto>> findById(@PathVariable Long id, HttpServletRequest request){
+    public ResponseEntity<ApiResponse<SchoolDto>> findSchoolById(@PathVariable Long id, HttpServletRequest request){
         var school = service.findSchoolById(id);
         return ResponseEntity
                 .ok(ResponseUtil.success(school, "School has been found successfully", request.getRequestURI()));
     }
 
     @GetMapping
-    public ResponseEntity<ApiResponse<List<SchoolDto>>> findAll(HttpServletRequest request){
+    public ResponseEntity<ApiResponse<List<SchoolDto>>> findAllSchools(HttpServletRequest request){
         List<SchoolDto> schoolList = service.findAllSchools();
         return ResponseEntity
                 .ok(ResponseUtil.success(schoolList,"Schools has been found successfully", request.getRequestURI()));
@@ -53,7 +53,7 @@ public class SchoolController {
 
     //DELETE
     @DeleteMapping("/{id}")
-    public ResponseEntity<ApiResponse<?>> deleteSchool(@PathVariable Long id, HttpServletRequest request){
+    public ResponseEntity<ApiResponse<Void>> deleteSchool(@PathVariable Long id, HttpServletRequest request){
         service.deleteSchoolById(id);
         return ResponseEntity
                 .ok(ResponseUtil.success(null,"School with id: " + id + " has been deleted successfully", request.getRequestURI()));

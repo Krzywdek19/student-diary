@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface SchoolService {
     //CREATE
-    SchoolDto addSchool(CreateSchoolRequest request);
+    SchoolDto createSchool(CreateSchoolRequest request);
     //READ
     SchoolDto findSchoolById(Long id);
     List<SchoolDto> findAllSchools();
