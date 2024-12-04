@@ -89,7 +89,8 @@ public class SchoolClassServiceImpl implements SchoolClassService{
 
     //DELETE
     @Override
-    public void deleteSchoolClassById(Long id) {
+    public void deleteSchoolClassById(Long schoolId, Long id) {
+        checkWhetherClassBelongsToSchool(findRawSchoolClassById(id), id, schoolId);
         var schoolClass = repository
                 .findById(id)
                 .orElseThrow(()->new ResourceNotFoundException(SchoolClass.class, id));
