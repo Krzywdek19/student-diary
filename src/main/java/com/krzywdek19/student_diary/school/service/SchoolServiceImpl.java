@@ -64,15 +64,15 @@ public class SchoolServiceImpl implements SchoolService{
         var school = repository
                 .findById(id)
                 .orElseThrow(()-> new ResourceNotFoundException(School.class ,id));
-        if(request.schoolType().isPresent() && !request.schoolType().get().equals(school.getSchoolType())){
-            school.setSchoolType(request.schoolType().get());
-        }
-        if(request.address().isPresent() && !request.address().get().equals(school.getAddress())) {
-            school.setAddress(request.address().get());
-        }
-        if(request.name().isPresent() && !request.name().get().equals(school.getName())) {
-            school.setName(request.name().get());
-        }
+        request
+                .schoolType()
+                .ifPresent(school::setSchoolType);
+        request
+                .address()
+                .ifPresent(school::setAddress);
+        request
+                .name()
+                .ifPresent(school::setName);
         return mapper
                 .schoolToSchoolDto(school);
     }

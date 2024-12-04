@@ -14,7 +14,7 @@ public interface SchoolClassService {
     List<SchoolClassDto> findSchoolClassesBySchoolId(Long schoolId);
     List<SchoolClassDto> findAllSchoolClasses();
     //UPDATE
-    SchoolClassDto updateSchoolClass(Long id, UpdateSchoolClassRequest request);
+    SchoolClassDto changeSchoolClassDetails(Long id, UpdateSchoolClassRequest request);
     //DELETE
     void deleteSchoolClassById(Long id);
 }
