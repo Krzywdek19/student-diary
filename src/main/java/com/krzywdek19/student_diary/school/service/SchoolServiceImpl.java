@@ -24,7 +24,7 @@ public class SchoolServiceImpl implements SchoolService{
 
     //CREATE
     @Override
-    public SchoolDto addSchool(CreateSchoolRequest request) {
+    public SchoolDto createSchool(CreateSchoolRequest request) {
         var school = mapper.createSchoolRequestToSchool(request);
         System.out.println(school.toString());
         school.setClassCount(0);
@@ -80,8 +80,9 @@ public class SchoolServiceImpl implements SchoolService{
     //DELETE
     @Override
     public void deleteSchoolById(Long id) {
-        repository
+        var school = repository
                 .findById(id)
-                .ifPresent(repository::delete);
+                .orElseThrow(()-> new ResourceNotFoundException(School.class ,id));
+        repository.delete(school);
     }
 }

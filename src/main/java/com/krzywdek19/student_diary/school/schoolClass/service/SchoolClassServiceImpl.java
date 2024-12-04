@@ -1,6 +1,8 @@
 package com.krzywdek19.student_diary.school.schoolClass.service;
 
+import com.krzywdek19.student_diary.common.exception.ResourceNotBelongException;
 import com.krzywdek19.student_diary.common.exception.ResourceNotFoundException;
+import com.krzywdek19.student_diary.school.School;
 import com.krzywdek19.student_diary.school.schoolClass.SchoolClass;
 import com.krzywdek19.student_diary.school.schoolClass.SchoolClassMapper;
 import com.krzywdek19.student_diary.school.schoolClass.SchoolClassRepository;
@@ -21,12 +23,18 @@ public class SchoolClassServiceImpl implements SchoolClassService{
     private final SchoolServiceImpl schoolService;
     private final SchoolClassMapper schoolClassMapper;
 
+    private void checkWhetherClassBelongsToSchool(SchoolClass schoolClass, Long id, Long schoolId) {
+        if(!schoolClass.getSchool().getId().equals(id)){
+            throw new ResourceNotBelongException(id, SchoolClass.class,schoolId, School.class);
+        }
+    }
+
     //CREATE
     @Override
     @Transactional
-    public SchoolClassDto createSchoolClass(CreateSchoolClassRequest request) {
+    public SchoolClassDto createSchoolClass(Long schoolId, CreateSchoolClassRequest request) {
         var school = schoolService
-                .findSchoolEntityById(request.schoolId());
+                .findSchoolEntityById(schoolId);
         school.setClassCount(school.getClassCount() + 1);
         var schoolClass = SchoolClass
                 .builder()
@@ -45,7 +53,9 @@ public class SchoolClassServiceImpl implements SchoolClassService{
     }
 
     @Override
-    public SchoolClassDto findSchoolClassById(Long id) {
+    public SchoolClassDto findSchoolClassById(Long schoolId, Long id) {
+        var schoolClass = findRawSchoolClassById(schoolId);
+        checkWhetherClassBelongsToSchool(schoolClass, id, schoolId);
         return schoolClassMapper
                 .schoolClassToSchoolClassDto(findRawSchoolClassById(id));
     }
@@ -59,20 +69,14 @@ public class SchoolClassServiceImpl implements SchoolClassService{
                 .toList();
     }
 
-    @Override
-    public List<SchoolClassDto> findAllSchoolClasses() {
-        return repository
-                .findAll()
-                .stream()
-                .map(schoolClassMapper::schoolClassToSchoolClassDto)
-                .toList();
-    }
-
     //UPDATE
     @Override
     @Transactional
-    public SchoolClassDto changeSchoolClassDetails(Long id, UpdateSchoolClassRequest request) {
+    public SchoolClassDto changeSchoolClassDetails(Long id, Long schoolId, UpdateSchoolClassRequest request) {
         var schoolClass = findRawSchoolClassById(id);
+        if(!schoolClass.getSchool().getId().equals(id)){
+            throw new ResourceNotBelongException(id, SchoolClass.class,schoolId, School.class);
+        }
         request
                 .classGrade()
                 .ifPresent(schoolClass::setClassGrade);
@@ -86,8 +90,9 @@ public class SchoolClassServiceImpl implements SchoolClassService{
     //DELETE
     @Override
     public void deleteSchoolClassById(Long id) {
-        repository
+        var schoolClass = repository
                 .findById(id)
-                .ifPresent(repository::delete);
+                .orElseThrow(()->new ResourceNotFoundException(SchoolClass.class, id));
+        repository.delete(schoolClass);
     }
 }

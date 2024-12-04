@@ -8,13 +8,12 @@ import java.util.List;
 
 public interface SchoolClassService {
     //CREATE
-    SchoolClassDto createSchoolClass(CreateSchoolClassRequest request);
+    SchoolClassDto createSchoolClass(Long schoolId, CreateSchoolClassRequest request);
     //READ
-    SchoolClassDto findSchoolClassById(Long id);
+    SchoolClassDto findSchoolClassById(Long schoolId, Long id);
     List<SchoolClassDto> findSchoolClassesBySchoolId(Long schoolId);
-    List<SchoolClassDto> findAllSchoolClasses();
     //UPDATE
-    SchoolClassDto changeSchoolClassDetails(Long id, UpdateSchoolClassRequest request);
+    SchoolClassDto changeSchoolClassDetails(Long schoolId, Long id, UpdateSchoolClassRequest request);
     //DELETE
     void deleteSchoolClassById(Long id);
 }
