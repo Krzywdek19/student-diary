@@ -1,0 +1,10 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://pg-studentdiary-student-diary.f.aivencloud.com:14106/defaultdb?ssl=require&user=avnadmin&password=AVNS_Jcw9ogwanSAqO9epqdL
+    username: anvadmin
+    password: AVNS_Jcw9ogwanSAqO9epqdL
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+server:
+  port: 9200
