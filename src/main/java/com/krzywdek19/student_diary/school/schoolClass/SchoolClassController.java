@@ -52,7 +52,7 @@ public class SchoolClassController {
     }
 
     //DELETE
-    @DeleteMapping("/id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<ApiResponse<Void>> deleteSchoolClassById(@PathVariable Long schoolId, @PathVariable Long id, HttpServletRequest httpServletRequest) {
         service.deleteSchoolClassById(schoolId, id);
         return ResponseEntity
