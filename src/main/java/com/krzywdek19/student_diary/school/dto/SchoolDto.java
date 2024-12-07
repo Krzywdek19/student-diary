@@ -6,5 +6,5 @@ import com.krzywdek19.student_diary.school.schoolClass.dto.SchoolClassDto;
 
 import java.util.List;
 
-public record SchoolDto (Long id, String name, Address address, String schoolType, int studentCount, int classCount, List<SchoolClassDto> schoolClasses){}
+public record SchoolDto (Long id, String name, Address address, String schoolType, List<SchoolClassDto> schoolClasses, int studentCount, int classCount){}
 //todo SchoolClasses -> SchoolClassDTO
